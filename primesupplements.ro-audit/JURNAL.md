@@ -40,10 +40,11 @@ Fiecare sesiune adaugă aici, pe scurt, ce a schimbat (data, zona, ce s-a făcut
 ### Reclame (Google Ads / Meta Ads)
 - În așteptare: conectare Windsor.ai (date doar citire) pentru Google Ads, Meta Ads, Search Console și GA4.
 
-## 2026-10-21 – 2026-10-22 – Redesign temă (Faza 1–2)
+## 2026-10-21 – 2026-10-22 – Redesign temă (Faza 1–2b)
 
 ### Redesign (folderul `redesign-2026/`)
 - 21.10: copie de lucru a temei live creată în Shopify: „Prime Redesign 2026 – Claude (NU PUBLICA)”, ID 193987346807, nepublicată; tema live nu a fost atinsă. Tema trasă local și pusă sub git (`redesign-2026/`).
 - 21.10: audit complet al temei (`redesign-2026/docs/01-audit.md`): Impact 6.7.1, 19 aplicații, 13 app embeds; Lighthouse de referință mobil: homepage 33, colecție 38, produs 54 (`docs/lighthouse-before/`); cauze: 450+ cereri, 1,5 MB scripturi terțe, gtag și Meta Pixel de două ori, trei familii de fonturi. Recomandare: refacere în profunzime pe Impact, nu migrare pe Horizon.
 - 21.10: cercetare pe 8 site-uri de inspirație + trenduri 2026 (`docs/02-cercetare-inspiratie.md`); 3 direcții vizuale cu mockup-uri mobil (`docs/03-directii-vizuale.md`, `docs/mockups/`).
 - 21.10: proprietarul a ales Direcția 3 „Flavor Drop” și a cerut o versiune mult mai profesionistă, cu prezentare pe desktop și mobil. În lucru: mockup de înaltă fidelitate (homepage, produs, colecție, meniu, coș, quiz) pe date și poze reale din magazin.
+- 22.10: mockup Direcția 3 Pro livrat (`redesign-2026/docs/mockups/directia-3-pro.html`, documentație `docs/04-directia-3-pro.md`, capturi `docs/screenshots-d3-pro/`): homepage, pagină de produs, colecție, meniu + căutare, coș, quiz, fiecare pe desktop 1440 și mobil 390, interactiv (arome, coș, calculatoare, mesaj de expediere în timp real). Prețuri, porții, arome, stocuri și formula Nitrox 3D sunt din magazin; recenziile, citatele sportivilor și culorile pe aromă sunt ilustrative. Nimic publicat, nimic schimbat în tema live. Urmează Faza 3–4 (implementare în tema copie 193987346807) după confirmarea proprietarului.
