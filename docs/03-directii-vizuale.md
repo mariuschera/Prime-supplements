@@ -43,3 +43,8 @@ Dacă preferi identitatea hardcore înainte de toate, Direcția 1 este alegerea;
 2. Confirmare că pot lucra prin Admin API pe copia `193987346807` (deja creată, nepublicată). Opțional, un token Theme Access (Apps → Theme Access) ar permite `shopify theme dev` cu preview live în timp ce lucrez; nu este obligatoriu.
 3. Decizii de business: un singur pop-up (theMarketer sau temă), un singur chat pe mobil (WhatsApp sau Inbox), textul exact pentru pragul/ora limită (300 lei, 15:00, L–V).
 4. Imagini: ședința foto nouă din Files e suficientă pentru hero, sportivi și lookbook. Dacă vrei imagini generate AI pentru fundaluri de aromă (texturi de fructe, stropi), le pot genera, dar recomand să nu generăm persoane sau produse.
+
+
+## Decizie (2026-10-22)
+
+Proprietarul a ales **Direcția 3 (Flavor)** și a cerut un nivel de finisare mult mai ridicat, cu prezentare pe desktop și mobil. Rezultatul este mockup-ul Pro descris în `04-directia-3-pro.md` (`mockups/directia-3-pro.html`). Direcțiile 1 și 2 rămân în arhivă.
