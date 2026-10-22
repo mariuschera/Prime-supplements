@@ -1,0 +1,89 @@
+{%- comment -%}
+  Accessibility (2026-10-13); items 1-3 have no visual effect, item 4 is an owner-approved contrast fix:
+  1. The search and cart drawers are disabled in the overlay group, so the header icons point their aria-controls at
+     elements that do not exist (an invalid ARIA reference). The dangling attribute is dropped; the icons keep working as
+     plain links to /search and /cart, exactly as before. If a drawer is enabled again, its element exists and the
+     attribute is kept. Skipped in the theme editor, where a drawer can be switched on without reloading the header.
+  2. The Pop Convert popup renders its promo image link without alt text when the campaign has no "Alt text" set in the
+     app, which leaves an image and a link without a name for screen readers. Until the alt text is filled in the app,
+     the image gets the text of the matching link from the page (e.g. the menu entry for the same collection), or a
+     generic label. Alt text set in the app always wins.
+  3. The Judge.me medal in the review widget is a link whose aria-label ("Judge.me Diamond Transparent Shop medal") does
+     not contain its visible text (the score, e.g. "100.0"), so speech-input users cannot name it (WCAG 2.5.3, Lighthouse
+     "label-content-name-mismatch"). The visible text is put at the start of the label ("100.0 Judge.me Diamond
+     Transparent Shop medal"). Nothing changes on screen; a label that already contains the visible text is left alone.
+  4. The Pop Convert social-proof notification ("... persoane ...") writes its secondary line in #8d8d8d on white (3.31). Only
+     text that has exactly that grey is set to #767676, the closest grey that passes WCAG AA (4.54); nothing else in the popup changes.
+{%- endcomment -%}
+<script>
+  (() => {
+    {%- unless request.design_mode -%}
+    document.querySelectorAll('[aria-controls="search-drawer"], [aria-controls="cart-drawer"]').forEach((toggle) => {
+      if (!document.getElementById(toggle.getAttribute('aria-controls'))) {
+        toggle.removeAttribute('aria-controls');
+      }
+    });
+    {%- endunless -%}
+
+    const labelFor = (link) => {
+      let path;
+
+      try {
+        path = new URL(link.href, location.href).pathname.replace(/\/$/, '');
+      } catch (error) {
+        return '';
+      }
+
+      const match = Array.from(document.querySelectorAll('a[href]')).find((candidate) => {
+        try {
+          return candidate !== link && new URL(candidate.href, location.href).pathname.replace(/\/$/, '') === path && candidate.textContent.trim() !== '';
+        } catch (error) {
+          return false;
+        }
+      });
+
+      return match ? match.textContent.trim().replace(/\s+/g, ' ') : '';
+    };
+
+    const nameImages = (root) => {
+      root.querySelectorAll('img:not([alt])').forEach((image) => {
+        const link = image.closest('a[href]');
+        image.alt = link ? (labelFor(link) || 'Vezi oferta') : '';
+      });
+
+      root.querySelectorAll('.social-pop span').forEach((text) => {
+        if (getComputedStyle(text).color === 'rgb(141, 141, 141)') {
+          text.style.color = '#767676';
+        }
+      });
+    };
+
+    const watchPopConvert = () => {
+      const root = window.pcTarget;
+
+      if (!(root instanceof ShadowRoot) || root.__a11yWatched) {
+        return Boolean(root && root.__a11yWatched);
+      }
+
+      root.__a11yWatched = true;
+      nameImages(root);
+      new MutationObserver(() => nameImages(root)).observe(root, {subtree: true, childList: true, attributes: true, attributeFilter: ['alt', 'src']});
+      return true;
+    };
+
+    if (!watchPopConvert()) {
+      const observer = new MutationObserver(() => watchPopConvert() && observer.disconnect());
+      observer.observe(document.body, {childList: true});
+      setTimeout(() => observer.disconnect(), 60000);
+    }
+
+    document.querySelectorAll('a.jdgm-medal[aria-label]').forEach((medal) => {
+      const text = medal.textContent.trim().replace(/\s+/g, ' ');
+      const label = medal.getAttribute('aria-label');
+
+      if (text && !label.includes(text)) {
+        medal.setAttribute('aria-label', `${text} ${label}`);
+      }
+    });
+  })();
+</script>

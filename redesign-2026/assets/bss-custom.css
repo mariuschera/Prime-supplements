@@ -1,0 +1,14 @@
+[bss-b2b-main-product-form] [bss-b2b-variant-price] span {
+  font-size: var(--text-lg) !important;
+}
+cart-drawer:not([open]) [bss-b2b-item-original-price],
+cart-drawer:not([open]) [bss-b2b-final-line-price],
+cart-drawer:not([open]) [bss-b2b-cart-total-price] {
+  display: none !important;
+}
+
+.horizontal-product__info [bss-b2b-product-price] span {
+  color: rgb(var(--text-color) / .7) !important;
+  font-size: var(--text-sm) !important;
+  line-height: 1.6 !important;
+}
